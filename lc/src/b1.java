@@ -3,8 +3,24 @@
 // 215. Kth Largest Element in an Array
 import java.util.*;
 
-class Solution {
-    public int findKthLargest(int[] nums, int k) {
+public class b1 {
+    static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        int[] nums = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+        }
+
+        int result = findKthLargest(nums, k);
+        System.out.println(result);
+        sc.close();
+    }
+
+    public static int findKthLargest(int[] nums, int k) {
         int[] count = new int[20000];
         for (int num : nums) {
             count[num + 10000]++;
@@ -27,24 +43,7 @@ class Solution {
         }
         return -1;
     }
-}
 
-public class b1 {
-    static Scanner sc = new Scanner(System.in);
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int k = sc.nextInt();
-        int[] nums = new int[n];
-        for (int i = 0; i < n; i++) {
-            nums[i] = sc.nextInt();
-        }
-        Solution sol = new Solution();
-        int result = sol.findKthLargest(nums, k);
-        System.out.println(result);
-        sc.close();
-    }
 }
 // Một mảng count có kích thước 20001 được tạo ra và tất cả các phần tử ban đầu
 // đều bằng 0.
