@@ -36,3 +36,5 @@ public class b5 {
 // left right ở đây không phải là bên phải và bên trái của mảng mà
 // là ở cùng 1 đầu phía bên trái của 1 mảng đặt vậy ấy thoi chứ đúng
 // là đầu trái 1 và đầu trái 2 tại bên trái cùng 1 vị trí bên trái của mảng
+// hàm có return thì mới đặt tên biến = tên hàm và mới sysout (tên biến=tên hàm)
+// ra được
