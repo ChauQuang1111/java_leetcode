@@ -4,9 +4,10 @@ import java.util.*;
 
 // Class chạy thử
 public class b14 {
-    static Scanner sc = new Scanner(System.in); 
+    static Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
-        
+
         int m = sc.nextInt();
         int n = sc.nextInt();
         int[][] grid = new int[m][n];
@@ -135,8 +136,7 @@ public class b14 {
     }
 }
 
-
-Ok👍
+// Ok👍
 
 // mình giải
 // thích chi
@@ -245,14 +245,14 @@ Ok👍
 // các hàng/cột ở biên**(
 // tức là`minRow`hoặc`maxRow`,`minCol`hoặc`maxCol`).*
 // Vì xóa
-// một hàng/cột ở giữa 
+// một hàng/cột ở giữa
 // không thể giảm kích thước bao ngoài (bounding box).
 // * Như vậy ta chỉ cần thử tối đa **4 trường hợp**:
 
-//   1. Xóa `minRow`
-//   2. Xóa `maxRow`
-//   3. Xóa `minCol`
-//   4. Xóa `maxCol`
+// 1. Xóa `minRow`
+// 2. Xóa `maxRow`
+// 3. Xóa `minCol`
+// 4. Xóa `maxCol`
 
 // ---
 
@@ -262,8 +262,8 @@ Ok👍
 
 // ```
 // grid = [
-//  [1,0,1],
-//  [1,1,1]
+// [1,0,1],
+// [1,1,1]
 // ]
 // ```
 
@@ -279,20 +279,20 @@ Ok👍
 
 // * **Xóa hàng 0**:
 
-//   * Còn lại: `[1,1,1]`
-//   * bounding box = `(row: 1→1, col: 0→2)` → diện tích = `1 * 3 = 3`
+// * Còn lại: `[1,1,1]`
+// * bounding box = `(row: 1→1, col: 0→2)` → diện tích = `1 * 3 = 3`
 // * **Xóa hàng 1**:
 
-//   * Còn lại: `[1,0,1]`
-//   * bounding box = `(row: 0→0, col: 0→2)` → diện tích = `1 * 3 = 3`
+// * Còn lại: `[1,0,1]`
+// * bounding box = `(row: 0→0, col: 0→2)` → diện tích = `1 * 3 = 3`
 // * **Xóa cột 0**:
 
-//   * Còn lại: `[0,1], [1,1]`
-//   * bounding box = `(row: 0→1, col: 1→2)` → diện tích = `2 * 2 = 4`
+// * Còn lại: `[0,1], [1,1]`
+// * bounding box = `(row: 0→1, col: 1→2)` → diện tích = `2 * 2 = 4`
 // * **Xóa cột 2**:
 
-//   * Còn lại: `[1,0], [1,1]`
-//   * bounding box = `(row: 0→1, col: 0→1)` → diện tích = `2 * 2 = 4`
+// * Còn lại: `[1,0], [1,1]`
+// * bounding box = `(row: 0→1, col: 0→1)` → diện tích = `2 * 2 = 4`
 
 // ---
 
