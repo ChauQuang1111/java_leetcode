@@ -2,7 +2,7 @@
 // 679. 24 Game(18/08/2025)
 import java.util.*;
 
-class b8 {
+public class b9 {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
