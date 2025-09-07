@@ -8,7 +8,7 @@ public class b29 {
     public static void main(String[] args) {
         int n = sc.nextInt();
         int[] result = sumZero(n);
-
+        sc.close();
         System.out.println(Arrays.toString(result));
 
         // Hàm `Arrays.toString()` trong Java là một phương thức tiện ích dùng để
@@ -64,7 +64,7 @@ public class b29 {
 
         // **Lưu ý quan trọng**: Để sử dụng `Arrays.toString()`, bạn phải nhập thư viện
         // `java.util.Arrays;` vào đầu file.
-        sc.close();
+
     }
 
     public static int[] sumZero(int n) {
