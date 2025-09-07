@@ -15,6 +15,7 @@ public class b28 {
             queries[i][1] = sc.nextInt(); // r
         }
         long res = minOperations(queries);
+        sc.close();
         System.out.println(res);
     }
 
