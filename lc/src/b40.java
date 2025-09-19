@@ -2,65 +2,72 @@
 // # 3408. Design Task Manager(18/09/2025)
 import java.util.*;
 
-// Lớp quản lý task
-class TaskManager {
-    int[] priorities = new int[100001]; // Lưu priority hiện tại của mỗi task (taskId ≤ 100000)
-    int[] userIds = new int[100001]; // Lưu userId tương ứng với task
-    // Max-heap: ưu tiên priority cao, nếu bằng nhau thì taskId lớn hơn
-    PriorityQueue<Long> PQ = new PriorityQueue<>((a, b) -> Long.compare(b, a));
+public class b40 {
+    // ============================
+    // Inner class TaskManager
+    // ============================
+    static class TaskManager {
+        public int[] priorities = new int[100001]; // Lưu priority hiện tại
+        public int[] userIds = new int[100001]; // Lưu userId
+        public PriorityQueue<Long> PQ = new PriorityQueue<>((a, b) -> Long.compare(b, a));
 
-    // Khởi tạo từ danh sách task ban đầu
-    public TaskManager(List<List<Integer>> tasks) {
-        for (List<Integer> task : tasks) {
-            int userId = task.get(0);
-            int taskId = task.get(1);
-            int priority = task.get(2);
+        // Khởi tạo
+        public TaskManager(List<List<Integer>> tasks) {
+            for (List<Integer> task : tasks) {
+                int userId = task.get(0);
+                int taskId = task.get(1);
+                int priority = task.get(2);
+                priorities[taskId] = priority;
+                userIds[taskId] = userId;
+                PQ.offer(encode(priority, taskId));
+            }
+        }
+
+        // Thêm task
+        public void add(int userId, int taskId, int priority) {
+            if (priorities[taskId] > 0)
+                return; // nếu tồn tại thì bỏ qua
             priorities[taskId] = priority;
             userIds[taskId] = userId;
-            PQ.offer((long) priority * 100001 + taskId); // encode thành 1 số long
+            PQ.offer(encode(priority, taskId));
+        }
+
+        // Sửa priority
+        public void edit(int taskId, int newPriority) {
+            priorities[taskId] = newPriority;
+            PQ.offer(encode(newPriority, taskId));
+        }
+
+        // Xóa task
+        public void rmv(int taskId) {
+            priorities[taskId] = -1; // đánh dấu xóa
+        }
+
+        // Thực thi task ưu tiên cao nhất
+        public int execTop() {
+            while (!PQ.isEmpty()) {
+                long current = PQ.poll();
+                int taskId = (int) (current % 100001);
+                int priority = (int) (current / 100001);
+
+                if (priorities[taskId] != priority)
+                    continue; // skip task sai version
+
+                priorities[taskId] = -1; // xóa task này
+                return userIds[taskId];
+            }
+            return -1;
+        }
+
+        // Encode priority + taskId thành 1 số long
+        private long encode(int priority, int taskId) {
+            return (long) priority * 100001 + taskId;
         }
     }
 
-    // Thêm task mới
-    public void add(int userId, int taskId, int priority) {
-        if (priorities[taskId] > 0)
-            return; // Nếu đã tồn tại thì bỏ qua
-        priorities[taskId] = priority;
-        userIds[taskId] = userId;
-        PQ.offer((long) priority * 100001 + taskId);
-    }
-
-    // Sửa priority của task
-    public void edit(int taskId, int newPriority) {
-        priorities[taskId] = newPriority;
-        PQ.offer((long) newPriority * 100001 + taskId); // thêm bản mới vào heap
-    }
-
-    // Xóa task
-    public void rmv(int taskId) {
-        priorities[taskId] = -1; // đánh dấu đã xóa
-    }
-
-    // Thực thi task ưu tiên cao nhất
-    public int execTop() {
-        while (!PQ.isEmpty()) {
-            long current = PQ.poll(); // lấy phần tử có priority cao nhất
-            int taskId = (int) (current % 100001);
-            int priority = (int) (current / 100001);
-
-            // Nếu taskId đã bị xóa hoặc priority không khớp (do edit) → bỏ qua
-            if (priorities[taskId] != priority)
-                continue;
-
-            // Nếu hợp lệ → xóa khỏi danh sách và trả về userId
-            priorities[taskId] = -1;
-            return userIds[taskId];
-        }
-        return -1; // Không còn task nào
-    }
-}
-
-public class b40 {
+    // ============================
+    // Main demo
+    // ============================
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -69,7 +76,6 @@ public class b40 {
         int n = sc.nextInt();
         List<List<Integer>> tasks = new ArrayList<>();
 
-        // Nhập từng task: userId taskId priority
         System.out.println("Nhập các task (userId taskId priority):");
         for (int i = 0; i < n; i++) {
             int userId = sc.nextInt();
@@ -78,10 +84,9 @@ public class b40 {
             tasks.add(Arrays.asList(userId, taskId, priority));
         }
 
-        // Khởi tạo TaskManager
         TaskManager tm = new TaskManager(tasks);
 
-        // Menu demo
+        // Menu
         while (true) {
             System.out.println("\nChọn thao tác:");
             System.out.println("1. add(userId, taskId, priority)");
@@ -127,6 +132,168 @@ public class b40 {
         sc.close();
     }
 }
+// Ok,
+
+// mình giải
+// thích chi
+// tiết nhé👇
+
+// ```java
+// public PriorityQueue<Long> PQ = new PriorityQueue<>((a, b) -> Long.compare(b,
+// a));```
+
+// ###1.`PriorityQueue<Long>`
+
+// *
+// Đây là**
+// hàng đợi
+// ưu tiên**
+
+// trong Java (thuộc `java.util`).
+// * Mặc định, `PriorityQueue` là **min-heap** → phần tử nhỏ nhất sẽ được ưu
+// tiên lấy ra trước.
+
+// ### 2. `(a, b) -> Long.compare(b, a)`
+
+// * Đây là một **Comparator** viết bằng **lambda expression**.
+// * `Long.compare(b, a)` so sánh **ngược lại** với mặc định:
+
+// * Nếu `a < b` → trả về
+
+// dương (ngược lại bình thường).
+// * Nếu `a > b` → trả về âm.
+// * Nghĩa là: số **lớn hơn** sẽ được ưu tiên trước.
+
+// 👉 Điều này biến `PriorityQueue` từ **min-heap** (ưu tiên nhỏ nhất) thành
+// **max-heap** (ưu tiên lớn nhất).
+
+// ### 3. Ý nghĩa tổng thể
+
+// Câu lệnh này tạo ra một **priority queue sắp xếp giảm dần**, tức:
+
+// * Khi `offer()` các số vào queue → tự động sắp xếp theo thứ tự giảm dần.
+// * Khi `poll()` → luôn lấy **giá trị lớn nhất** trước.
+
+// ### 4. Ví dụ minh họa
+
+// ```java
+// import java.util.PriorityQueue;
+
+// public class Main {
+// public static void main(String[] args) {
+// PriorityQueue<Long> PQ = new PriorityQueue<>((a, b) -> Long.compare(b, a));
+
+// PQ.offer(10L);
+// PQ.offer(5L);
+// PQ.offer(20L);
+
+// while (!PQ.isEmpty()) {
+// System.out.println(PQ.poll());
+// }
+// }
+// }```
+
+// 👉
+
+// Kết quả
+// in ra:
+
+// ```20 10 5```
+
+// ---
+
+// Bạn có
+// muốn mình vẽ**min-heap vs max-heap**
+// dạng sơ
+// đồ để
+// thấy rõ
+// sự khác
+// biệt không?
+// À mình hiểu👍
+// bạn đang
+// thắc mắc**tại sao
+// lại viết`Long.compare(b,a)`
+// thay vì`Long.compare(a,b)`**.
+
+// ---
+
+// ###1. Hàm`Long.compare(x,y)`
+
+// *
+// Trả về:
+
+// ***<0**nếu`x<y`***=0**nếu`x==y`***>0**nếu`x>y`
+
+// Ví dụ:
+
+// ```
+// java Long.compare(3L,5L) // -1
+// Long.compare(5L,3L) // +1
+// Long.compare(7L,7L) // 0
+// ```
+
+// ---
+
+// ###2.
+// So sánh trong`PriorityQueue`
+
+// `PriorityQueue`
+// sắp xếp
+// dựa trên**Comparator**:
+
+// *Nếu`compare(a, b) < 0` → `a` đứng trước `b`.
+// * Nếu `compare(a, b) > 0` → `b` đứng trước `a`.
+
+// ---
+
+// ### 3. Trường hợp
+
+// mặc định (min-heap)
+
+// Nếu viết:
+
+// ```java
+// (a, b) -> Long.compare(a, b)
+// ```
+
+// Thì:
+
+// * `a < b` → kết quả âm → `a` đứng trước → **số nhỏ hơn ưu tiên trước** →
+// min-heap.
+
+// Ví dụ: `[5, 10, 20]` → poll ra `5` trước.
+
+// ---
+
+// ### 4. Trường hợp
+
+// đảo ngược (max-heap)
+
+// Nếu viết:
+
+// ```java
+// (a, b) -> Long.compare(b, a)
+// ```
+
+// Thì:
+
+// * `a < b` → `Long.compare(b, a)` trả về dương → `b` đứng trước → **số lớn hơn
+// ưu tiên trước** → max-heap.
+
+// Ví dụ: `[5, 10, 20]` → poll ra `20` trước.
+
+// ---
+
+// ✅ Nói ngắn gọn:
+
+// * `Long.compare(a, b)` → sắp xếp **tăng dần** (min-heap).
+// * `Long.compare(b, a)` → sắp xếp **giảm dần** (max-heap).
+
+// ---
+
+// Bạn có muốn mình làm **bảng so sánh chi tiết** giữa 2
+
+// cái này (a,b) và (b,a) để dễ nhớ hơn không?
 
 // Ok, để mình giải thích thuật toán trong phiên bản Java mà bạn viết (dùng **mã
 // hóa priority + taskId vào một số Long**).
