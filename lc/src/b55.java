@@ -7,15 +7,12 @@ public class b55 {
         Scanner sc = new Scanner(System.in);
 
         // Nhập dữ liệu
-        System.out.print("Nhập số chai ban đầu: ");
         int numBottles = sc.nextInt();
-        System.out.print("Nhập số vỏ cần để đổi lần đầu: ");
         int numExchange = sc.nextInt();
 
         // Gọi hàm giải
         int result = maxBottlesDrunk(numBottles, numExchange);
 
-        // In kết quả
         System.out.println(result);
 
         sc.close();
