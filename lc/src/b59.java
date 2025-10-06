@@ -1,6 +1,6 @@
 
 // # 778. Swim in Rising Water(06/10/2025)
-import java.util.*; // Dùng cho Scanner
+import java.util.*;
 
 public class b59 {
     static Scanner sc = new Scanner(System.in);
