@@ -1,4 +1,3 @@
-
 // # 3350. Adjacent Increasing Subarrays Detection II(15/10/2025)
 // Rất hay 👏 — đoạn code Java này là **một phiên bản cực kỳ gọn** của thuật toán cho bài **LeetCode 3350 – Adjacent Increasing Subarrays Detection II**, và mình sẽ giải thích chi tiết cách nó hoạt động nhé.
 import java.util.*;
