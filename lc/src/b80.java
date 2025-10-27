@@ -1,6 +1,6 @@
 
 // # 2125. Number of Laser Beams in a Bank(27/10/2025)
-import java.util.Scanner;
+import java.util.*;
 
 public class b80 {
     static Scanner sc = new Scanner(System.in);
@@ -16,7 +16,7 @@ public class b80 {
         }
 
         int result = numberOfBeams(bank);
-        System.out.println("Tổng số tia laser là: " + result);
+        System.out.println(result);
 
         sc.close();
     }
