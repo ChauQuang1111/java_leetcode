@@ -52,17 +52,15 @@ class Bank {
         System.out.println("Số dư các tài khoản: " + Arrays.toString(balance));
     }
 
-    // ================== HÀM MAIN ==================
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // Nhập số lượng tài khoản
-        System.out.print("Nhập số lượng tài khoản: ");
         int n = sc.nextInt();
 
-        // Nhập số dư ban đầu của từng tài khoản
+       
         long[] balance = new long[n];
-        System.out.println("Nhập số dư ban đầu của các tài khoản:");
+       
         for (int i = 0; i < n; i++) {
             balance[i] = sc.nextLong();
         }
@@ -70,7 +68,7 @@ class Bank {
         // Tạo đối tượng Bank
         Bank bank = new Bank(balance);
 
-        // Menu chức năng
+       
         while (true) {
             System.out.println("\n=== MENU NGÂN HÀNG ===");
             System.out.println("1. Nạp tiền");
