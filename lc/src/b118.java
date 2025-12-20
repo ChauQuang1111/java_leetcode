@@ -36,64 +36,59 @@
 
 // ```java
 
-
-
 import java.util.*;
 
-class Solution {
+public class b118 {
+    static Scanner sc = new Scanner(System.in);
 
-    public class b118 {
-        static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) {
 
-        public static void main(String[] args) {
+        // Nhập chuỗi corridor
+        String corridor = sc.nextLine();
 
-            // Nhập chuỗi corridor
-            String corridor = sc.nextLine();
+        int result = numberOfWays(corridor);
 
-            int result = numberOfWays(corridor);
+        // In kết quả
+        System.out.println(result);
+    }
 
-            // In kết quả
-            System.out.println(result);
-        }
+    // Hàm tính số cách chia hành lang
+    public static int numberOfWays(String corridor) {
 
-        // Hàm tính số cách chia hành lang
-        public static int numberOfWays(String corridor) {
+        // Độ dài chuỗi hành lang
+        final int n = corridor.length();
 
-            // Độ dài chuỗi hành lang
-            final int n = corridor.length();
+        // Chuyển String -> mảng char để truy cập nhanh hơn
+        final char[] corr = corridor.toCharArray();
 
-            // Chuyển String -> mảng char để truy cập nhanh hơn
-            final char[] corr = corridor.toCharArray();
+        long ways = 1; // Tổng số cách chia
+        int seatCount = 0; // Đếm ghế trong 1 đoạn (0 hoặc 1)
+        int prevSeatIdx = -1; // Vị trí ghế trước đó (từ bên phải)
 
-            long ways = 1; // Tổng số cách chia
-            int seatCount = 0; // Đếm ghế trong 1 đoạn (0 hoặc 1)
-            int prevSeatIdx = -1; // Vị trí ghế trước đó (từ bên phải)
+        // Duyệt từ phải sang trái
+        for (int i = n - 1; i >= 0; i--) {
 
-            // Duyệt từ phải sang trái
-            for (int i = n - 1; i >= 0; i--) {
+            // Nếu là cây 'P' thì bỏ qua
+            if (corr[i] == 'P')
+                continue;
 
-                // Nếu là cây 'P' thì bỏ qua
-                if (corr[i] == 'P')
-                    continue;
-
-                // Nếu đã gặp 1 ghế trong cặp
-                if (seatCount != 0) {
-                    // Lưu lại vị trí ghế này
-                    prevSeatIdx = i;
-                }
-                // Nếu đang hoàn thành 1 cặp ghế
-                else if (prevSeatIdx > 0) {
-                    // Số vị trí đặt vách ngăn = khoảng cách giữa 2 ghế
-                    ways = (ways * (prevSeatIdx - i)) % 1_000_000_007L;
-                }
-
-                // Đổi trạng thái: 0 -> 1, 1 -> 0
-                seatCount ^= 1;
+            // Nếu đã gặp 1 ghế trong cặp
+            if (seatCount != 0) {
+                // Lưu lại vị trí ghế này
+                prevSeatIdx = i;
+            }
+            // Nếu đang hoàn thành 1 cặp ghế
+            else if (prevSeatIdx > 0) {
+                // Số vị trí đặt vách ngăn = khoảng cách giữa 2 ghế
+                ways = (ways * (prevSeatIdx - i)) % 1_000_000_007L;
             }
 
-            // Nếu không có đủ ghế hoặc ghế lẻ → không chia được
-            return (prevSeatIdx < 0 || seatCount != 0) ? 0 : (int) ways;
+            // Đổi trạng thái: 0 -> 1, 1 -> 0
+            seatCount ^= 1;
         }
+
+        // Nếu không có đủ ghế hoặc ghế lẻ → không chia được
+        return (prevSeatIdx < 0 || seatCount != 0) ? 0 : (int) ways;
     }
 }
 
@@ -152,7 +147,8 @@ class Solution {
 
 // # ## 📌 1. Mô tả bài toán (nói đơn giản)
 
-// # Bạn có **một hành lang dài** được biểu diễn bằng **chuỗi ký tự** `corridor`, chỉ gồm:
+// # Bạn có **một hành lang dài** được biểu diễn bằng **chuỗi ký tự**
+// `corridor`, chỉ gồm:
 
 // # * `'S'` → **Seat** (ghế)
 // # * `'P'` → **Plant** (cây)
@@ -167,7 +163,8 @@ class Solution {
 
 // # ## 📌 2. Mục tiêu của bài toán
 
-// # Bạn cần **chia hành lang thành nhiều đoạn** bằng cách đặt **vách ngăn** (divider) sao cho:
+// # Bạn cần **chia hành lang thành nhiều đoạn** bằng cách đặt **vách ngăn**
+// (divider) sao cho:
 
 // # ### ✅ Mỗi đoạn phải có **CHÍNH XÁC 2 ghế (2 'S')**
 
@@ -261,8 +258,8 @@ class Solution {
 // # * Mỗi **cặp 2 ghế liên tiếp** tạo thành 1 đoạn
 // # * Giữa **2 đoạn hợp lệ**, số cây (`P`) quyết định:
 
-// #   * Có bao nhiêu vị trí đặt vách ngăn
-// #   * → **số cách nhân lên**
+// # * Có bao nhiêu vị trí đặt vách ngăn
+// # * → **số cách nhân lên**
 
 // # 📌 Công thức tư duy:
 
@@ -289,8 +286,10 @@ class Solution {
 // # * ✅ giải thích **tại sao nhân số cây**
 
 // # 👉 Cứ nói nhé!
-// # Mình giải thích **thuật toán + chú thích từng dòng code** cho bài **2147. Number of Ways to Divide a Long Corridor** theo cách **dễ hiểu nhất** nhé 👍
-// # (đoạn code này dùng **DP 3 trạng thái**, hơi “ảo” nên mình sẽ nói chậm và có ví dụ)
+// # Mình giải thích **thuật toán + chú thích từng dòng code** cho bài **2147.
+// Number of Ways to Divide a Long Corridor** theo cách **dễ hiểu nhất** nhé 👍
+// # (đoạn code này dùng **DP 3 trạng thái**, hơi “ảo” nên mình sẽ nói chậm và
+// có ví dụ)
 
 // # ---
 
@@ -304,11 +303,15 @@ class Solution {
 
 // ### 🎯 Ý nghĩa 3 biến
 
-// # | Biến   | Ý nghĩa                                                                              |
-// # | ------ | ------------------------------------------------------------------------------------ |
-// # | `zero` | số cách chia khi **đã hoàn thành 1 đoạn (2 ghế)** và **sẵn sàng bắt đầu đoạn mới**   |
-// # | `one`  | số cách chia khi **đã gặp 1 ghế trong đoạn hiện tại**                                |
-// # | `two`  | số cách chia khi **chưa bắt đầu đoạn nào** hoặc **đang ở trạng thái hợp lệ ban đầu** |
+// # | Biến | Ý nghĩa |
+// # | ------ |
+// ------------------------------------------------------------------------------------
+// |
+// # | `zero` | số cách chia khi **đã hoàn thành 1 đoạn (2 ghế)** và **sẵn sàng
+// bắt đầu đoạn mới** |
+// # | `one` | số cách chia khi **đã gặp 1 ghế trong đoạn hiện tại** |
+// # | `two` | số cách chia khi **chưa bắt đầu đoạn nào** hoặc **đang ở trạng
+// thái hợp lệ ban đầu** |
 
 // # 👉 Ban đầu:
 
@@ -321,37 +324,36 @@ class Solution {
 // # two = 1
 
 // class Solution:
-//     def numberOfWays(self, corridor):
-//         MOD = 10**9 + 7
-        
-//         # zero: số cách khi vừa kết thúc 1 đoạn (đã có đủ 2 ghế)
-//         # one : số cách khi đoạn hiện tại đã có 1 ghế
-//         # two : số cách ban đầu / chưa bắt đầu đoạn
-//         zero = 0
-//         one = 0
-//         two = 1
+// def numberOfWays(self, corridor):
+// MOD = 10**9 + 7
 
-//         # Duyệt từng ký tự trong hành lang
-//         for thing in corridor:
-            
-//             # Nếu gặp GHẾ
-//             if thing == 'S':
-//                 # Khi gặp ghế:
-//                 # - các cách có 1 ghế (one) -> hoàn thành 1 đoạn => zero
-//                 # - các cách hợp lệ (two) -> bắt đầu đoạn mới => one
-//                 zero = one
-//                 one, two = two, one
+// # zero: số cách khi vừa kết thúc 1 đoạn (đã có đủ 2 ghế)
+// # one : số cách khi đoạn hiện tại đã có 1 ghế
+// # two : số cách ban đầu / chưa bắt đầu đoạn
+// zero = 0
+// one = 0
+// two = 1
 
-//             # Nếu gặp CÂY
-//             else:
-//                 # Cây không ảnh hưởng đến số ghế
-//                 # Nhưng nếu đã hoàn thành đoạn (zero),
-//                 # ta có thể đặt vách ngăn tại đây
-//                 two = (two + zero) % MOD
+// # Duyệt từng ký tự trong hành lang
+// for thing in corridor:
 
-//         # Kết quả là số cách kết thúc đúng tại trạng thái hoàn thành đoạn
-//         return zero
+// # Nếu gặp GHẾ
+// if thing == 'S':
+// # Khi gặp ghế:
+// # - các cách có 1 ghế (one) -> hoàn thành 1 đoạn => zero
+// # - các cách hợp lệ (two) -> bắt đầu đoạn mới => one
+// zero = one
+// one, two = two, one
 
+// # Nếu gặp CÂY
+// else:
+// # Cây không ảnh hưởng đến số ghế
+// # Nhưng nếu đã hoàn thành đoạn (zero),
+// # ta có thể đặt vách ngăn tại đây
+// two = (two + zero) % MOD
+
+// # Kết quả là số cách kết thúc đúng tại trạng thái hoàn thành đoạn
+// return zero
 
 // ## 🧠 Giải thích trực giác bằng ví dụ
 
@@ -361,14 +363,14 @@ class Solution {
 // # corridor = "SPSPS"
 // # ```
 
-// # | Ký tự | zero | one | two | Giải thích                 |
+// # | Ký tự | zero | one | two | Giải thích |
 // # | ----- | ---- | --- | --- | -------------------------- |
-// # | start | 0    | 0   | 1   | ban đầu                    |
-// # | S     | 0    | 1   | 0   | bắt đầu đoạn               |
-// # | P     | 0    | 1   | 0   | cây không đổi              |
-// # | S     | 1    | 0   | 1   | đủ 2 ghế → hoàn thành đoạn |
-// # | P     | 1    | 0   | 2   | có thêm vị trí đặt vách    |
-// # | S     | 0    | 2   | 0   | bắt đầu đoạn mới           |
+// # | start | 0 | 0 | 1 | ban đầu |
+// # | S | 0 | 1 | 0 | bắt đầu đoạn |
+// # | P | 0 | 1 | 0 | cây không đổi |
+// # | S | 1 | 0 | 1 | đủ 2 ghế → hoàn thành đoạn |
+// # | P | 1 | 0 | 2 | có thêm vị trí đặt vách |
+// # | S | 0 | 2 | 0 | bắt đầu đoạn mới |
 
 // # 👉 **kết quả = zero**
 
@@ -378,8 +380,6 @@ class Solution {
 
 // # * `zero` đại diện cho **những cách kết thúc với đủ 2 ghế**
 // # * Các trạng thái khác (`one`, `two`) là **chưa hợp lệ**
-
-
 
 // # ## 🧾 Tóm tắt ngắn gọn
 
