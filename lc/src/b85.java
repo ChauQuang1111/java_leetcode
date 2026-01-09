@@ -1,26 +1,53 @@
 
 // // Delete Nodes From Linked List Present (01/11/2025)
-import java.util.Scanner;
+import java.util.*;
 
-class ListNode {
-    int val; // Giá trị của node
-    ListNode next; // Con trỏ trỏ đến node kế tiếp
+public class b85 {
+    static Scanner sc = new Scanner(System.in);
 
-    ListNode() {
-    } // Constructor rỗng (dùng cho node tạm)
+    public static void main(String[] args) {
+        int n = sc.nextInt();
+        int[] listArr = new int[n];
+        for (int i = 0; i < n; i++) {
+            listArr[i] = sc.nextInt();
+        }
 
-    ListNode(int val) { // Constructor với giá trị
-        this.val = val;
+        // --- Nhập mảng nums (các giá trị cần xóa) ---
+
+        int m = sc.nextInt();
+        int[] nums = new int[m];
+        for (int i = 0; i < m; i++) {
+            nums[i] = sc.nextInt();
+        }
+
+        // --- Tạo danh sách liên kết ---
+        ListNode head = createLinkedList(listArr);
+
+        ListNode newHead = modifiedList(nums, head);
+
+        printLinkedList(newHead);
+
+        sc.close();
     }
 
-    ListNode(int val, ListNode next) { // Constructor với giá trị và node kế tiếp
-        this.val = val;
-        this.next = next;
-    }
-}
+    static class ListNode {
+        int val; // Giá trị của node
+        ListNode next; // Con trỏ trỏ đến node kế tiếp
 
-class Solution {
-    public ListNode modifiedList(int[] nums, ListNode head) {
+        ListNode() {
+        } // Constructor rỗng (dùng cho node tạm)
+
+        ListNode(int val) { // Constructor với giá trị
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) { // Constructor với giá trị và node kế tiếp
+            this.val = val;
+            this.next = next;
+        }
+    }
+
+    public static ListNode modifiedList(int[] nums, ListNode head) {
         if (head == null)
             return null; // Nếu danh sách rỗng thì trả về null
 
@@ -57,10 +84,7 @@ class Solution {
         // --- Bước 6: Trả về danh sách mới (bỏ qua node giả đầu tiên) ---
         return temp.next;
     }
-}
 
-public class b85 {
-    // Hàm tạo danh sách liên kết từ mảng
     public static ListNode createLinkedList(int[] arr) {
         if (arr.length == 0)
             return null;
@@ -82,40 +106,6 @@ public class b85 {
         System.out.println("null");
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        // --- Nhập danh sách liên kết ---
-        System.out.print("Nhập số lượng phần tử trong danh sách liên kết: ");
-        int n = sc.nextInt();
-        int[] listArr = new int[n];
-        System.out.println("Nhập các giá trị của danh sách:");
-        for (int i = 0; i < n; i++) {
-            listArr[i] = sc.nextInt();
-        }
-
-        // --- Nhập mảng nums (các giá trị cần xóa) ---
-        System.out.print("Nhập số lượng phần tử trong mảng nums: ");
-        int m = sc.nextInt();
-        int[] nums = new int[m];
-        System.out.println("Nhập các giá trị cần xóa:");
-        for (int i = 0; i < m; i++) {
-            nums[i] = sc.nextInt();
-        }
-
-        // --- Tạo danh sách liên kết ---
-        ListNode head = createLinkedList(listArr);
-
-        // --- Gọi hàm xử lý ---
-        Solution sol = new Solution();
-        ListNode newHead = sol.modifiedList(nums, head);
-
-        // --- In kết quả ---
-        System.out.println("Danh sách sau khi loại bỏ:");
-        printLinkedList(newHead);
-
-        sc.close();
-    }
 }
 
 // // ```python
