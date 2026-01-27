@@ -2,7 +2,7 @@
 // // Ok, mình giải thích **đề “Minimum Cost Path with Edge Reversals”** theo kiểu **dễ hiểu – đúng bản chất – hay gặp trong thuật toán đồ thị** nha 👌
 // // Ok,mình**giải thích thuật toán đúng theo code bạn đưa**,từng khối một,tập trung vào**ý tưởng+vì sao làm vậy**,không lan man👌
 // Ok👍mình**thêm`main`dùng`Scanner`**và**chú thích chi tiết trực tiếp trong code**,giữ nguyên logic thuật toán của bạn để dễ học và dễ nhớ.
-
+// cost
 // ---
 
 // ###✅Code hoàn chỉnh(có`main`+chú thích)
