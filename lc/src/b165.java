@@ -45,7 +45,7 @@ import java.util.*;
 public class b165{
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-int n = sc.nextInt();
+        int n = sc.nextInt();
 
         char[] letters = new char[n];
 
