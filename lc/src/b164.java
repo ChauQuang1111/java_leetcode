@@ -1,4 +1,4 @@
-// Minimum Cost to Convert String II(30/01/2026)
+//  Minimum Cost to Convert String II(30/01/2026)
 // Ok, mình **giải thích đề “Minimum Cost to Convert String II”** theo cách dễ hiểu nhất nhé 👌
 // (đề này khá hay, bản chất là **đồ thị + Floyd–Warshall**)
 // Ok, mình **giải thích thuật toán đúng theo code bạn đưa**, đi **từng khối một**, để bạn hiểu *vì sao code này giải được “Minimum Cost to Convert String II”* 👌
@@ -135,7 +135,7 @@ public class b164{
  *  - next[26]: con trỏ đến ký tự tiếp theo
  *  - index: đánh số chuỗi (chỉ node kết thúc chuỗi mới có index)
  */
-static class TrieNode {
+public static class TrieNode {
     TrieNode[] next = new TrieNode[26];
     int index = -1;
 
