@@ -9,23 +9,11 @@
 
 // ```java
 
-import java.util.Scanner;
-
-class Solution {
-
-    // Khối static để chạy thử, bạn có thể giữ hoặc xóa
-    static {
-        for (int i = 0; i < 500; i++) {
-            numSub("111111");
-        }
-    }
-
-    // Hàm chính sử dụng Scanner
+import java.util.*;
+public class b100 {
+    static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        // Nhập chuỗi nhị phân
-        String s = sc.next();
+       String s = sc.next();
 
         // Gọi hàm xử lý và in kết quả
         System.out.println(numSub(s));
@@ -54,9 +42,13 @@ class Solution {
         }
 
         return res;
+    }  
     }
-}
 
+
+   
+
+   
 // ---
 
 // ##✅**
