@@ -65,7 +65,7 @@ public class b189 {
 
         int result = sumRootToLeaf(root);
 
-        System.out.println("Tổng các số nhị phân từ root đến leaf: " + result);
+        System.out.println(result);
 
         sc.close();
 
