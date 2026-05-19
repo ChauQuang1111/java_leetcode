@@ -893,7 +893,7 @@ import java.util.*;
     Space: O(n)
 */
 
-import java.util.*;
+import java.util.Scanner;
 
 public class b237 {
     static Scanner sc = new Scanner(System.in);
