@@ -217,10 +217,10 @@ public class b214 {
 
         private int parent[];
         private int siz[];
-        private int n;
+        
 
         public Dsu(int n) {
-            this.n = n;
+          
             parent = new int[n];
             siz = new int[n];
 
