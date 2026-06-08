@@ -952,7 +952,7 @@ public class b253 {
  static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
- int n = sc.nextInt();
+     int n = sc.nextInt();
 
         int[] landStartTime = new int[n];
         int[] landDuration = new int[n];
