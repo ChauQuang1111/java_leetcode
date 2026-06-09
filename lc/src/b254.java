@@ -449,7 +449,7 @@ public class b254 {
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-int n = sc.nextInt();
+      int n = sc.nextInt();
 
         int[] nums = new int[n];
 
