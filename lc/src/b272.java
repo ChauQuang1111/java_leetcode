@@ -516,7 +516,7 @@ public class b272{
     }
 
     // Hàm tìm GCD
-    private static int gcd(int a, int b) {
+    public static int gcd(int a, int b) {
 
         while (a != 0) {
 
